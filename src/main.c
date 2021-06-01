@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Create a node.
 struct node {
   int data;
   struct node *next;
 };
 
 void insertAtBeginning(struct node **ref, int data) {
+  // Allocate memory to a node.
   struct node *new_node = (struct node *)malloc(sizeof(struct node));
 
+  // Insert the item.
   new_node->data = data;
   new_node->next = (*ref);
 
+  // Move head to new node.
   (*ref) = new_node;
 }
 
+// Insert a node after a node.
 void insertAfter(struct node *node, int data) {
   if (node == NULL) {
     printf("the given previous node cannot be NULL");
@@ -54,14 +59,17 @@ void deleteNode(struct node **ref, int key) {
     return;
   }
 
+  // Find the key to be deleted.
   while (temp != NULL && temp->data != key) {
     prev = temp;
     temp = temp->next;
   }
 
+  // If the key is not present.
   if (temp == NULL)
     return;
 
+  // Remove the node.
   prev->next = temp->next;
 
   free(temp);
